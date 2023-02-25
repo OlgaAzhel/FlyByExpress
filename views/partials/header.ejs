@@ -12,11 +12,13 @@
 </head>
 <body>
     <nav>
+        <h1>FlyByExpress&nbsp</h1>
         <img src="/images/airplane.png">
         <a href="/offers" <%- title==='All Offers' ? 'class="active"' : '' %>>ALL OFFERS</a>
         <% if (user) { %>
             <a href="/offers/new" <%- title==='Add Offer' ? 'class="active"' : '' %>>
                 ADD NEW OFFER</a>
+            <a href="/users/<%= user._id%>" <%- title==='Add Offer' ? 'class="active"' : '' %>>MY ACCOUNT</a>
             <a href="/logout">LOG OUT</a>
             <% } else { %> 
                 <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
@@ -24,6 +26,6 @@
     </nav>
     
     <main>
-        <h1>
+        <!-- <h1>
          <%= title %>
-        </h1>
+        </h1> -->

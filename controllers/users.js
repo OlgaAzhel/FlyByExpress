@@ -5,5 +5,13 @@ module.exports = {
 };
 
 function show(req, res) {
-    res.send('User will be displayed here')
+
+    User.findById(req.params.id, function(err, lookUpUser) {
+        res.render('users/show', {
+            title: `${lookUpUser.name}`,
+            lookUpUser,
+
+        })
+    })
+
 }

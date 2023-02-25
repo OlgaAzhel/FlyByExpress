@@ -1,0 +1,86 @@
+<%- include('../partials/header') %>
+
+    <section id="profile">
+        <span class="photo">
+            <img class="userAv" alt="avatar" src="<%= lookUpUser.avatar %>" referrerpolicy="no-referrer">
+        </span>
+        <span class="info">
+            <table>
+                <th>
+                    <tr>
+                        <a href="/users/<%= lookUpUser._id%>" class="userName">
+                            <%= lookUpUser.name %>
+                        </a>
+                    </tr>
+                </th>
+                <tr>
+                    <td>Email:</td>
+                    <td>
+                        <%= lookUpUser.email %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Phone:</td>
+                    <td>
+                        <%= lookUpUser.phone %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Deliveries:</td>
+                    <td>
+                        <%= lookUpUser.deliveries %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Rating:</td>
+                    <td>
+                        <%= lookUpUser.rating %>
+                    </td>
+                </tr>
+                <% if (user) { %>
+                    <tr>
+                        <td>
+                            <button>Edit contact info</button>
+                        </td>
+                    </tr>
+                    <%} %>
+            </table>
+        </span>
+    </section>
+    <section id="reviews">
+        <h2>Reviews</h2>
+        <% if (user) { %>
+            <form id="add-review-form" method="POST" action="/users/<%= lookUpUser._id%>">
+                <label>Review:</label><br>
+                <textarea class="review-body" name="content"></textarea><br>
+                <label>Rate communication:</label>
+                <select class="rating" name="communication">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5" selected>5</option>
+                </select><br>
+                <label>Rate cost:</label>
+                <select class="rating" name="cost">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5" selected>5</option>
+                </select><br>
+                <label>Rate overall satisfaction:</label>
+                <select class="rating" name="overall">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5" selected>5</option>
+                </select><br>
+                <input type="submit" value="Add Review">
+            </form>
+            <% } %>
+    </section>
+    
+
+    <%- include('../partials/footer') %>

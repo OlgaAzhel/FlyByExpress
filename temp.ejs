@@ -1,0 +1,58 @@
+<section class="reviews-list">
+    <% if (user.reviews.length) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Delivery</th>
+                    <th>Review</th>
+                    <th>Communication</th>
+                    <th>Cost</th>
+                    <th>Overall satisfaction</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% let total=0 %>
+                    <% user.reviews.forEach(function(r) { %>
+                        <% total +=r.communication %>
+                            <% total +=r.cost %>
+                                <% total +=r.overall %>
+                                    <tr>
+                                        <td class="review-user"><img alt="avatar" src="<%= r.userAvatar %>"
+                                                referrerpolicy="no-referrer">
+                                            <%= r.userName %>
+                                        </td>
+                                        <td>
+                                            <%= r.delivery.id %>
+                                        </td>
+                                        <td>
+                                            <%= r.content %>
+                                        </td>
+                                        <td>
+                                            <%= r.communication %>
+                                        </td>
+                                        <td>
+                                            <%= r.cost %>
+                                        </td>
+                                        <td>
+                                            <%= r.overall %>
+                                        </td>
+                                        <!-- <td>
+                                                <% if (user?._id.equals(r.user)) { %>
+                                                    <form action="/reviews/<%= r._id %>?_method=DELETE" method="POST">
+                                                        <button type="submit">X</button>
+                                                    </form>
+                                                    <% } %>
+                                            </td> -->
+                                    </tr>
+                                    <% }); %>
+                                        <tr>
+                                            <td colspan="3"></td>
+                                            <td><strong>
+                                                    <%= lookUpUser.rating=(total / movie.reviews.length).toFixed(1) %>
+                                                </strong></td>
+                                        </tr>
+            </tbody>
+        </table>
+</section>

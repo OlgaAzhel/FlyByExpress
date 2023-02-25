@@ -11,7 +11,7 @@ body {
 
 nav {
   background-color: #7ed5eb;
-  height:60px;
+  height: 60px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -32,6 +32,20 @@ nav>a {
   text-decoration: none;
 }
 
+nav>h1 {
+  color: white;
+}
+
+body>main {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  overflow-y: scroll;
+}
+
+
 .login {
   display: flex;
   justify-content: center;
@@ -41,4 +55,90 @@ nav>a {
 
 .login img {
   height: 30px;
+}
+
+.userAv {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+}
+
+.userName {
+  font-size: 20px;
+}
+
+#profile {
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+  border-bottom: 2px solid #7ed5eb;
+
+}
+
+.photo {
+  margin-left: 20px;
+  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info {
+  margin-left: 20px;
+  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#reviews {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+#add-review-form {
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+
+.review-body {
+  font-size: 15px;
+  width: 500px;
+  min-height: 60px;
+  border: 1px solid #7ed5eb;
+  border-radius: 2px;
+  resize: none;
+
+}
+
+.rating {
+  display: inline;
+  width: 40px;
+  height: 40px;
+  font-size: 15px;
+  border: 1px solid #7ed5eb;
+}
+
+button,
+input[type="submit"] {
+  height: 30px;
+  border: 1px solid#424748;
+  border-radius: 2px;
+  background-color: #7ed5eb;
+  font-size: 15px;
+
+}
+
+button:hover,
+input[type="submit"]:hover {
+  color: white;
+
 }
