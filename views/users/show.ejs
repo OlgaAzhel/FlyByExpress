@@ -81,6 +81,49 @@
             </form>
             <% } %>
     </section>
-    
+    <section class="reviews-list">
+        <% if (user.reviews.length) { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Delivery</th>
+                        <th>Review</th>
+                        <th>Communication</th>
+                        <th>Cost</th>
+                        <th>Overall satisfaction</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% user.reviews.forEach(function(r) { %>
+                        <tr>
+                            <td class="review-user"><img alt="avatar" src="<%= r.userAvatar %>"
+                                    referrerpolicy="no-referrer">
+                                <%= r.userName %>
+                            </td>
+                            <td>
+                                delivery
+                            </td>
+                            <td>
+                                <%= r.content %>
+                            </td>
+                            <td>
+                                <%= r.communication %>
+                            </td>
+                            <td>
+                                <%= r.cost %>
+                            </td>
+                            <td>
+                                <%= r.overall %>
+                            </td>
+
+                        </tr>
+                    <% }); %>
+                        <% }; %>
+
+                </tbody>
+            </table>
+    </section>
 
     <%- include('../partials/footer') %>
