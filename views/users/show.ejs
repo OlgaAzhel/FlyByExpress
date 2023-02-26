@@ -83,47 +83,56 @@
     </section>
     <section class="reviews-list">
         <% if (user.reviews.length) { %>
-            <table>
-                <thead>
-                    <tr>
-                        <th>User</th>
-                        <th>Delivery</th>
-                        <th>Review</th>
-                        <th>Communication</th>
-                        <th>Cost</th>
-                        <th>Overall satisfaction</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% user.reviews.forEach(function(r) { %>
-                        <tr>
-                            <td class="review-user"><img alt="avatar" src="<%= r.userAvatar %>"
-                                    referrerpolicy="no-referrer">
-                                <%= r.userName %>
-                            </td>
-                            <td>
-                                delivery
-                            </td>
-                            <td>
-                                <%= r.content %>
-                            </td>
-                            <td>
-                                <%= r.communication %>
-                            </td>
-                            <td>
-                                <%= r.cost %>
-                            </td>
-                            <td>
-                                <%= r.overall %>
-                            </td>
+            <% user.reviews.forEach(function(r) { %>
+                <section class="review">
+                    <span class="picture">
+                        <img alt="avatar" src="<%= r.userAvatar %>" referrerpolicy="no-referrer">
+                        <a href="/users/<%= user._id%>">
+                            <%= r.userName %>
+                        </a>
+                    </span>
+                    <span class="delivery-review">
+                        <table>
+                            <tr>
+                                <td>
+                                    delivery
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <%= r.content %>
+                                </td>
+                            </tr>
+                        </table>
+                    </span>
+                    <span class="rate">
+                        <table>
+                            <tr>
+                                <td>Communication rate:</td>
+                                <td class="grade">
+                                    <%= r.communication %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Cost rate:</td>
+                                <td class="grade">
+                                    <%= r.cost %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Overall satisfaction rate:&nbsp&nbsp</td>
+                                <td class="grade">
+                                    <%= r.overall %>
+                                </td>
+                            </tr>
+                        </table>
+                    </span>
+                </section>
+                <% }); %>
+                    <% }; %>
 
-                        </tr>
-                    <% }); %>
-                        <% }; %>
-
-                </tbody>
-            </table>
+                        </tbody>
+                        </table>
     </section>
 
     <%- include('../partials/footer') %>

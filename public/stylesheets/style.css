@@ -124,27 +124,81 @@ body>main {
   width: 40px;
   height: 40px;
   font-size: 15px;
-  border: 1px solid #7ed5eb;
+  border: 2px solid #7ed5eb;
   border-radius: 4px;
 }
 
 button,
 input[type="submit"] {
+  min-width: 180px;
   height: 35px;
-border: 2px solid #7ed5eb;
+  border: 2px solid #7ed5eb;
   border-radius: 4px;
-  background-color:#7ed5eb;
+  background-color: #7ed5eb;
   font-size: 20px;
-  color:white;
-box-shadow: 3px 3px 2px 1px rgba(66,71,72, .2);
-
-
+  color: white;
+  box-shadow: 3px 3px 2px 1px rgba(66, 71, 72, .2);
 }
 
 button:hover,
 input[type="submit"]:hover {
-  border: 2px solid #7ed5eb;
-  background-color: white;
-  color:#7ed5eb;
+  font-weight: bold;
 
+}
+
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.review {
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+}
+
+.picture {
+  display: flex;
+  flex-direction: column;
+}
+
+.rate {
+  width: 240px;
+}
+
+.picture {
+  margin-right: 50px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.picture>img {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+.grade {
+
+  text-align: center;
+  width: 30px;
+  height: 20px;
+  border: 2px solid #7ed5eb;
+  border-radius: 4px;
+  background-color: #7ed5eb;
+  font-size: 20px;
+  color: white;
+
+}
+
+.delivery-review {
+  width: 200px;
+  border: 2px solid rgb(66, 71, 72);
+  border-radius: 4px;
+  margin-right: 20px;
 }
