@@ -26,8 +26,7 @@ const reviewSchema = new Schema({
     },
     delivery: {
         type: Schema.Types.ObjectId,
-        // ref: 'Delivery',
-        // required: true
+        ref: 'Offer',
     },
 
     user: {
@@ -49,7 +48,11 @@ const userSchema = new Schema({
     },
     email: String,
     avatar: String,
-    reviews: [reviewSchema]
+    reviews: [reviewSchema],
+    offers: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Offer'
+    }]
 }, {
     timestamps: true
 });

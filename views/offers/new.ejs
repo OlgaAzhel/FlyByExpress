@@ -1,0 +1,45 @@
+<%- include('../partials/header') %>
+    <h2>Create a new delivery offer:</h2>
+    <form id="new-offer" action="/offers" method="POST">
+        <label>Choose direction:</label>
+        <select name="direction">
+            <option value="from Belarus">from Belarus</option>
+            <option value="from US" selected>from US</option>
+        </select>
+
+        <label>Departure City:</label>
+        <input type="text" name="departureCity">
+
+        <label>Transit City:</label>
+        <input type="text" name="transitCity">
+
+        <label>Destination City:</label>
+        <input type="text" name="destinationCity">
+
+        <label>Departs:</label>
+        <input type="date" name="departureDate">
+
+        <label>Package accept last day:</label>
+        <input type="date" name="cutoffDate">
+
+        <label>Package arrived and available day:</label>
+        <input type="date" name="availDate">
+
+        <label>Accept packages by mail/amazon:</label>
+        <select name="mail">
+            <option value="true" selected>Yes</option>
+            <option value="false">No</option>
+        </select>
+
+        <label>Accept electronics:</label>
+        <select name="electronics">
+            <option value="true" selected>Yes</option>
+            <option value="false" >No</option>
+        </select>
+
+        <label >Additional information:</label>
+        <input type="text" name="info" class="add-info">
+
+        <input type="submit" value="Add Delivery Offer" >
+    </form>
+    <%- include('../partials/footer') %>
