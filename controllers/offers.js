@@ -14,19 +14,17 @@ function create(req, res) {
     req.body.userAvatar = req.user.avatar;
     
     const offer = new Offer(req.body)
+
+    User.findById(req.user._id, function (err, theUser) {
+        theUser.offers.push(offer)
+        theUser.save(function (err) {
+        })
+    })
     
     console.log("offer and updated req body",offer, req.body)
-    offer.save(function(err, offer){
+    offer.save(function(){
 
-        User.findById(req.user._id, function (err, theUser) {
-            theUser.offers.push(offer)
-            theUser.save(function(err){
-             })
-        })
-        if (err) return res.redirect('offers/new')
-        console.log(offer)
-
-        res.redirect('offers/index')
+        res.redirect('offers/')
     })
 
 }

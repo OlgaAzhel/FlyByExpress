@@ -38,7 +38,11 @@ const offerSchema = new Schema({
     },
     userName: String,
     userAvatar: String,
-    
+    reviews: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Review',
+    }]
+
 }, {
     timestamps: true
 });
