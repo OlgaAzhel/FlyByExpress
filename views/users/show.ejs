@@ -3,106 +3,114 @@
     <section id="profile">
         <span class="photo">
             <img class="userAv" alt="avatar" src="<%= lookUpUser.avatar %>" referrerpolicy="no-referrer">
+            <a href="/users/<%= lookUpUser._id%>" class="userName">
+                <%= lookUpUser.name %>
+            </a>
         </span>
         <span class="info">
             <table>
-                <th>
-                    <tr>
-                        <a href="/users/<%= lookUpUser._id%>" class="userName">
-                            <%= lookUpUser.name %>
-                        </a>
-                    </tr>
-                </th>
-                <tr>
-                    <td>Email:</td>
-                    <td>
-                        <%= lookUpUser.email %>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Phone:</td>
-                    <td>
-                        <%= lookUpUser.phone %>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Deliveries:</td>
-                    <td>
-                        <%= lookUpUser.deliveries %>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Rating:</td>
-                    <td>
-                        <%= lookUpUser.rating %>
-                    </td>
-                </tr>
-                <% if (user) { %>
-                    <tr>
+                <tbody>
+                    <tr class="single-offer">
+                        <td class="header-cell">EMAIL:</td>
                         <td>
-                            <button>Edit contact info</button>
+                            <%= lookUpUser.email %>
                         </td>
                     </tr>
-                    <%} %>
+                    <tr class="single-offer">
+                        <td class="header-cell">PHONE:</td>
+                        <td>
+                            <%= lookUpUser.phone %>
+                        </td>
+                    </tr>
+                    <tr class="single-offer">
+                        <td class="header-cell">DELIVERIES:</td>
+                        <td>
+                            <% offers.forEach((offer)=> { %>
+                                 <a href="/offers/<%= offer._id %>" class="offer-link">
+                                <%=offer.departureDate.toLocaleDateString('en-us', { timeZone: 'GMT' ,
+                                        year:"numeric", month:"numeric", day:"numeric"})%> 
+                                </a><br>
+                                
+                                <%})%>
+                        </td>
+                    </tr>
+                    <tr class="single-offer">
+                        <td class="header-cell">RATING:</td>
+                        <td>
+                            <%= Math.round(rating*100)/100 %>
+                        </td>
+                    </tr>
+
+                </tbody>
             </table>
-        </span>
-    </section>
+                    </span>
+                    </section>
+                                <% if (user.googleId===lookUpUser.googleId) { %>
+
+                                            <button class="edit">EDIT CONTACT INFO</button>
+
+                                    <%} %>
+
     <section id="reviews">
-        
-        
+
+
         <section class="reviews-list">
-            <% if (lookUpUser.reviewsReceived) { %>
-                <h2>Reviews</h2>
-            <% lookUpUser.reviewsReceived.forEach(function(r) { %>
-                <section class="review">
-                    <span class="picture">
-                        <img alt="avatar" src="<%= r.userAvatar %>" referrerpolicy="no-referrer">
-                        <a href="/users/<%= user._id%>">
-                            <%= r.userName %>
-                        </a>
-                    </span>
-                    <span class="delivery-review">
-                        <table>
-                            <tr>
-                                <td>
-                                    delivery
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <%= r.content %>
-                                </td>
-                            </tr>
-                        </table>
-                    </span>
-                    <span class="rate">
-                        <table>
-                            <tr>
-                                <td>Communication rate:</td>
-                                <td class="grade">
-                                    <%= r.communication %>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Cost rate:</td>
-                                <td class="grade">
-                                    <%= r.cost %>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Overall satisfaction rate:&nbsp&nbsp</td>
-                                <td class="grade">
-                                    <%= r.overall %>
-                                </td>
-                            </tr>
-                        </table>
-                    </span>
-                </section>
-                <% }); %>
-                    <% }; %>
+            <% if (reviews) { %>
+                <h2>REVIEWS</h2>
+                <% reviews.forEach(function(r) { %>
+                    <section class="review">
+                        <span class="picture">
+                            <a href="/offers/<%= r.offer%>">
+                                DELIVERY OFFER
+                            </a>
+                            <img alt="avatar" src="<%= r.userAvatar %>" referrerpolicy="no-referrer">
+                            <a href="/users/<%= r.user._id%>">
+                                <%= r.userName %>
+                            </a>
+                        </span>
+                        <span class="delivery-review">
 
-                        </tbody>
-                        </table>
-    </section>
+                            <table>
+                                <tr>
+                                    <td>
 
-    <%- include('../partials/footer') %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <%= r.content %>
+                                    </td>
+                                </tr>
+                            </table>
+                        </span>
+                        <span class="rate">
+                            <table>
+                                <tr>
+                                    <td>Communication rate:</td>
+                                    <td class="grade">
+                                        <%= r.communication %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Cost rate:</td>
+                                    <td class="grade">
+                                        <%= r.cost %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Overall satisfaction rate:&nbsp&nbsp</td>
+                                    <td class="grade">
+                                        <%= r.overall %>
+                                    </td>
+                                </tr>
+                            </table>
+                        </span>
+                    </section>
+                    <% }); %>
+                        <% }; %>
+
+                            </tbody>
+                            </table>
+        </section>
+
+        <%- include('../partials/footer') %>

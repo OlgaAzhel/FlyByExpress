@@ -1,5 +1,6 @@
 const Offer = require('../models/offer');
 const User = require('../models/user');
+const Review = require('../models/review');
 
 function newOffer(req, res) {
     res.render('offers/new', { title: 'Add New Delivery offer' });
@@ -35,8 +36,11 @@ function create(req, res) {
 function show(req, res) {
     console.log("Show offer controller run...")
     Offer.findById(req.params.id, function (err, offer) {
-        User.findById(offer.creator._id, function (err, offerCreator) {
-            res.render('offers/show', { title: 'Offer Details', offer, offerCreator })
+        Review.find({ offer: offer }, function (err, reviews) {
+            User.findById(offer.creator._id, function (err, offerCreator) {
+                res.render('offers/show', { title: 'Offer Details', offer, offerCreator, reviews })
+            })
+
         })
 
     })

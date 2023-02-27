@@ -3,118 +3,185 @@
 
     <table class="offer-details" id="fromUS">
         <tbody>
-            <tr>
-                <td>COURIER:</td>
-                <td class="picture">
+            <tr class="single-offer">
+                <td class="header-col">COURIER:</td>
+                <td class="offer-det-pic">
                     <img alt="avatar" src="<%= offer.userAvatar %>" referrerpolicy="no-referrer">
                     <a href="/users/<%= offer.creator._id%>">
                         <%= offer.userName %>
                     </a>
                 </td>
             </tr>
-            <tr>
-                <td>COURIER'S RATING:</td>
+            <tr class="single-offer">
+                <td class="header-col">COURIER'S RATING:</td>
                 <td>4.8</td>
             </tr>
-            <tr>
-                <td>COURIER'S CONTACT:</td>
+            <tr class="single-offer">
+                <td class="header-col">COURIER'S CONTACT:</td>
                 <td>
                     <%= offerCreator.email%>
                         <br>
                         <%= offerCreator.phone%>
                 </td>
             </tr>
-            <tr>
-                <td>DEPARTURE CITY:</td>
+            <tr class="single-offer">
+                <td class="header-col">DEPARTURE CITY:</td>
                 <td>
                     <%= offer.departureCity%>
                 </td>
             </tr>
-            <tr>
-                <td>TRANSIT CITY:</td>
+            <tr class="single-offer">
+                <td class="header-col">TRANSIT CITY:</td>
                 <td>
                     <%= offer.transitCity%>
                 </td>
             </tr>
-            <tr>
-                <td>DESTINATION CITY:</td>
+            <tr class="single-offer">
+                <td class="header-col">DESTINATION CITY:</td>
                 <td>
                     <%= offer.destinationCity%>
                 </td>
             </tr>
-            <tr>
-                <td>DEPARTURE DATE:</td>
+            <tr class="single-offer">
+                <td class="header-col">DEPARTURE DATE:</td>
                 <td><%=offer.departureDate.toLocaleDateString('en-us', { timeZone: 'GMT' , year:"numeric",
                         month:"short", day:"numeric"})%></td>
             </tr>
-            <tr>
-                <td>LAST DAY ACCEPTING<br> PACKAGES:</td>
+            <tr class="single-offer">
+                <td class="header-col">LAST DAY ACCEPTING PACKAGES:</td>
                 <td><%=offer.cutoffDate.toLocaleDateString('en-us', { timeZone: 'GMT' ,year:"numeric", month:"short",
                         day:"numeric"})%>
                 </td>
             </tr>
-            <tr>
-                <td>PACKAGE AVAILABLE<br>AT THE DESTINATION:</td>
+            <tr class="single-offer">
+                <td class="header-col">PACKAGE AVAILABLE AT THE DESTINATION:</td>
                 <td><%=offer.availDate.toLocaleDateString('en-us', { timeZone: 'GMT' ,year:"numeric", month:"short",
                         day:"numeric"})%>
                 </td>
             </tr>
-            <tr>
-                <td>PACKAGE ACCEPT<br>BY MAIL / AMAZON:</td>
+            <tr class="single-offer">
+                <td class="header-col">PACKAGE ACCEPT BY MAIL / AMAZON:</td>
                 <td>
                     <%=offer.mail ? "YES" : "NO" %>
                 </td>
             </tr>
-            <tr>
-                <td>ACCEPT ELECTRONICS:</td>
+            <tr class="single-offer">
+                <td class="header-col">ACCEPT ELECTRONICS:</td>
                 <td>
                     <%=offer.electronics ? "YES" : "NO" %>
                 </td>
             </tr>
-            <tr>
-                <td>OTHER DETAILS:</td>
+            <tr class="single-offer">
+                <td class="header-col">OTHER DETAILS:</td>
                 <td>
                     <%=offer.info%>
                 </td>
             </tr>
         <tbody>
     </table>
-    <% let d=new Date() %>
-    <% let time=d.getTime() %>
-    <% let reviewOnTime=offer.departureDate.getTime() %>
-    <% if (reviewOnTime < time) {%>
-                    <% if (user ) { %>
-                        <form id="add-review-form" method="POST" action="/offers/<%= offer._id%>/reviews">
-                            <label>Create a review:</label><br>
-                            <textarea class="review-body" name="content"></textarea><br>
-                            <label>Rate communication:
-                                <select class="rating" name="communication">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5" selected>5</option>
-                                </select></label><br>
-                            <label>Rate cost:
-                                <select class="rating" name="cost">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5" selected>5</option>
-                                </select></label><br>
-                            <label>Rate overall satisfaction:
-                                <select class="rating" name="overall">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5" selected>5</option>
-                                </select></label><br>
-                            <input type="submit" value="Add Review">
-                        </form>
-                        <% } %>
-                            </section>
+    <% if (user.googleId===offerCreator.googleId) { %>
+        <button class="edit">EDIT OFFER</button>
+        <%} %>
 
-<% } %>
-                            <%- include('../partials/footer') %>
+            <% let d=new Date() %>
+                <% let time=d.getTime() %>
+                    <% let reviewOnTime=offer.departureDate.getTime() %>
+                        <% if (reviewOnTime < time) {%>
+                            <% if (user ) { %>
+                                <form id="add-review-form" method="POST" action="/offers/<%= offer._id%>/reviews">
+                                    <label>
+                                        <h2>CREATE A REVIEW:</h2>
+                                    </label><br>
+                                    <textarea class="review-body" name="content"></textarea><br>
+                                    <label>Rate communication:
+                                        <select class="rating" name="communication">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5" selected>5</option>
+                                        </select></label><br>
+                                    <label>Rate cost:
+                                        <select class="rating" name="cost">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5" selected>5</option>
+                                        </select></label><br>
+                                    <label>Rate overall satisfaction:
+                                        <select class="rating" name="overall">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5" selected>5</option>
+                                        </select></label><br>
+                                    <input type="submit" value="Add Review">
+                                </form>
+                                <% } %>
+                                    </section>
+                                    <% } %>
+
+
+                                        <section class="reviews-list">
+                                            <% if (reviews) { %>
+                                                <h2>REVIEWS:</h2>
+                                                <% reviews.forEach(function(r) { %>
+                                                    <section class="review">
+                                                        <span class="picture">
+                                                            <a href="/offers/<%= r.offer%>">
+                                                                DELIVERY OFFER
+                                                            </a>
+                                                            <img alt="avatar" src="<%= r.userAvatar %>"
+                                                                referrerpolicy="no-referrer">
+                                                            <a href="/users/<%= r.user._id%>">
+                                                                <%= r.userName %>
+                                                            </a>
+                                                        </span>
+                                                        <span class="delivery-review">
+
+                                                            <table>
+                                                                <tr>
+                                                                    <td>
+
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <%= r.content %>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </span>
+                                                        <span class="rate">
+                                                            <table>
+                                                                <tr>
+                                                                    <td>Communication rate:</td>
+                                                                    <td class="grade">
+                                                                        <%= r.communication %>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Cost rate:</td>
+                                                                    <td class="grade">
+                                                                        <%= r.cost %>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Overall satisfaction rate:&nbsp&nbsp</td>
+                                                                    <td class="grade">
+                                                                        <%= r.overall %>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </span>
+                                                    </section>
+                                                    <% }); %>
+                                                        <% }; %>
+
+                                                            </tbody>
+                                                            </table>
+                                        </section>
+
+                                        <%- include('../partials/footer') %>

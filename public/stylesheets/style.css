@@ -42,8 +42,13 @@ body>main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 30px;
   overflow-y: scroll;
+}
+body h2 {
+  text-align: center;
 }
 
 
@@ -69,7 +74,7 @@ body>main {
 }
 
 #profile {
-  min-width: 600px;
+  min-width: 900px;
   margin: 10px;
   padding: 10px;
   display: flex;
@@ -81,37 +86,53 @@ body>main {
 }
 
 .photo {
-  margin-left: 20px;
-  margin-right: 20px;
+  min-width: 200px;
+margin-left: 5px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .info {
-  margin-left: 20px;
-  margin-right: 20px;
+  width: 600px;
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
+.info a {
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+.info > table {
+  width:100%;
+}
+
+
 #reviews {
+  min-width: 900px;
   margin: 10px;
   display: flex;
   flex-direction: column;
 }
 
 #add-review-form {
+  margin: 20px;
+  min-width: 800px;
   display: flex;
   flex-direction: column;
-  padding: 5px;
-  border-radius: 5px;
+  padding: 20px;
+    border: 2px solid #7ed5eb;
+      border-radius: 4px;
 }
 
 
 .review-body {
-  width: 600px;
+  width: 100%;
   min-height: 60px;
   border: 2px solid rgb(66, 71, 72);
   border-radius: 4px;
@@ -129,7 +150,9 @@ body>main {
 
 button,
 input[type="submit"] {
-  min-width: 200px;
+  margin-top: 5px;
+  min-width: 250px;
+  max-width: 300px;
   height: 35px;
   border: 2px solid #7ed5eb;
   border-radius: 4px;
@@ -151,20 +174,21 @@ input[type="submit"]:hover {
 }
 
 .review {
-  margin: 20px;
+  width: 800px;
+  margin: 10px;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
 
 }
 
 
 .rate {
-  width: 240px;
+  width: 300px;
 }
 
 .picture {
-  margin-right: 20px;
+width: 250px;
 
   display: flex;
   flex-direction: column;
@@ -178,11 +202,16 @@ input[type="submit"]:hover {
   height: 50px;
 }
 
+.picture>a:nth-child(1) {
+  margin-bottom: 10px;
+  color: #7ed5eb;
+}
+
 .grade {
 
   text-align: center;
   width: 30px;
-  height: 20px;
+  height: 30px;
   border: 2px solid #7ed5eb;
   border-radius: 4px;
   background-color: #7ed5eb;
@@ -192,14 +221,14 @@ input[type="submit"]:hover {
 }
 
 .delivery-review {
-  min-width: 250px;
-  border: 2px solid rgb(66, 71, 72);
+  min-width: 300px;
+  border: 1px solid #7ed5eb;
   border-radius: 4px;
   margin-right: 20px;
 }
 
 #new-offer {
-  min-width:500px;
+  min-width: 500px;
   display: flex;
   flex-direction: column;
   font-size: 20px;
@@ -208,7 +237,7 @@ input[type="submit"]:hover {
 }
 
 #new-offer label {
-  margin-top: 10px;
+  margin-top: 5px;
   margin-bottom: 5px;
 }
 
@@ -220,45 +249,95 @@ input[type="submit"]:hover {
   font-size: 20px;
   margin-bottom: 10px;
 }
+
 .add-info {
   min-height: 60px;
   margin-bottom: 10px;
 }
 
 .offer-list {
-width: 800px;
+  width: 800px;
 }
 
-.offer-list > thead {
-background-color: #7ed5eb;
- color: white;
+.offer-list>thead {
+  background-color: #7ed5eb;
+  color: white;
+  
 }
 
 th {
   color: white;
-  font-weight:500
+  font-weight: 500;
 }
 
 .offer-list>tbody>tr>td {
   text-align: center;
 }
+
 .single-offer {
-  background-color:#d5ebf1;
+  background-color: #d5ebf1;
+  height: 30px;
 }
 
-td>a:hover {
-color: rgb(255, 255, 255);
-}
 
 .service-description {
   width: 800px;
   text-align: justify;
   font-size: larger;
-letter-spacing: 1px;
+  letter-spacing: 1px;
 }
-h3 {
+
+h2 {
   font-weight: 400;
 }
-h3>span {
-font-weight:bold
+
+h2>span {
+  font-weight: bold
+}
+
+.offer-details {
+  min-width: 800px;
+  border-radius: 4px;
+
+}
+
+
+.offer-detailstr tbody {
+  padding: 5px;
+  background-color: #d5ebf1;
+  border-collapse: collapse;
+  border: 1px solid white;
+
+}
+
+.header-col {
+  width: 400px;
+}
+
+.offer-det-pic {
+  border: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+}
+
+.offer-det-pic>img {
+  border-radius: 50%;
+  margin-right: 5px;
+  width: 50px;
+  height: 50px;
+}
+
+.offer-link {
+display:block
+}
+
+.header-cell {
+  width: 150px
+}
+.edit {
+
+  align-self: center;
 }
