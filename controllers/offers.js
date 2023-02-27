@@ -59,10 +59,56 @@ function index(req, res) {
     })
 }
 
+function edit(req,res) {
+    Offer.findById(req.params.id, function(err, offer) {
+        let departureDateString = offer.departureDate.toLocaleDateString('en-us', {
+            timeZone: 'GMT',
+            year: "numeric", month: "numeric", day: "numeric"
+        })
+        let cutoffDateString = offer.cutoffDate.toLocaleDateString('en-us', {
+            timeZone: 'GMT',
+            year: "numeric", month: "numeric", day: "numeric"
+        })
+        let availDateString = offer.availDate.toLocaleDateString('en-us', {
+            timeZone: 'GMT',
+            year: "numeric", month: "numeric", day: "numeric"
+        })
+
+        let departureDateFormatted = intoDateString(departureDateString)
+        let cutoffDateFormatted = intoDateString(cutoffDateString)
+        let availDateFormatted = intoDateString(availDateString)
+
+        res.render('offers/edit', {
+            title: 'Edit Offer',
+            offer,
+            departureDateFormatted,
+            cutoffDateFormatted,
+            availDateFormatted
+        })
+    })
+}
+
+function intoDateString(string) {
+    let arr = []
+    let newArr = string.split('/')
+    arr.push(newArr.pop())
+    newArr.forEach(num => {
+        if (num.length === 1) {
+            newNum = "0" + num
+            arr.push(newNum)
+        } else {
+            arr.push(num)
+        }
+    })
+    return arr.join("-")
+
+}
+
 module.exports = {
     new: newOffer,
     create,
     show,
-    index
+    index,
+    edit
     // delete: deleteReview
 };

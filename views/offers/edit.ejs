@@ -1,0 +1,63 @@
+<%- include('../partials/header') %>
+    <h2>UPDATE DELIVERY OFFER:</h2>
+    <form id="new-offer" action="/offers/<%= offer.id%>?_method=PUT" method="POST">
+        <label>Choose direction:</label>
+        <select name="direction">
+            <% if (offer.direction==="from Belarus" ) {%>
+                <option selected>from Belarus</option>
+                <option>from US</option>
+                <%} else {%>
+                    <option>from Belarus</option>
+                    <option selected>from US</option>
+                    <%}%>
+        </select>
+
+        <label>Departure City:</label>
+        <input type="text" name="departureCity" value="<%= offer.departureCity %>">
+
+        <label>Transit City:</label>
+        <input type="text" name="transitCity" value="<%= offer.transitCity %>">
+
+        <label>Destination City:</label>
+        <input type="text" name="destinationCity" value="<%= offer.destinationCity %>">
+
+        <label>Departs:</label>
+        <input type="date" name="departureDate" value="<%=departureDateFormatted%>">
+                                        
+
+        <label>Package accept last day:</label>
+        <input type="date" name="cutoffDate" value="<%=cutoffDateFormatted%>">
+
+        <label>Package arrived and available day:</label>
+        <input type="date" name="availDate" value="<%=availDateFormatted%>">
+
+        <label>Accept packages by mail/amazon:</label>
+        <% if (offer.mail) {%>
+            <select name="mail">
+                <option selected>Yes</option>
+                <option>No</option>
+            </select>
+            <%} else {%>
+                <select name="mail">
+                    <option>Yes</option>
+                    <option selected>No</option>
+                </select>
+                <%}%>
+                <label>Accept electronics:</label>
+                <% if (offer.electronics) {%>
+                    <select name="electronics">
+                        <option selected>Yes</option>
+                        <option>No</option>
+                    </select>
+                <%} else {%>
+                        <select name="electronics">
+                            <option >Yes</option>
+                            <option selected>No</option>
+                        </select>
+                    <%}%>
+                        <label>Additional information:</label>
+                        <input type="text" name="info" class="add-info" value="<%= offer.info %>">
+
+                        <input type="submit" value="UPDATE OFFER">
+    </form>
+    <%- include('../partials/footer') %>

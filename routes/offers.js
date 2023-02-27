@@ -10,6 +10,10 @@ router.post('/', ensureLoggedIn, offersCtrl.create);
 
 router.get('/:id', ensureLoggedIn, offersCtrl.show);
 
+router.get('/:id/edit', ensureLoggedIn, offersCtrl.edit);
+
+// router.put('/:id/', ensureLoggedIn, offersCtrl.update);
+
 router.get('/', offersCtrl.index);
 
 // router.delete('/reviews/:id', ensureLoggedIn, reviewsCtrl.delete)

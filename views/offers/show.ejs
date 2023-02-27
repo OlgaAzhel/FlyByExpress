@@ -80,7 +80,7 @@
         <tbody>
     </table>
     <% if (user.googleId===offerCreator.googleId) { %>
-        <button class="edit">EDIT OFFER</button>
+        <button class="edit"><a href="/offers/<%=offer.id%>/edit">EDIT OFFER</a></button>
         <%} %>
 
             <% let d=new Date() %>
