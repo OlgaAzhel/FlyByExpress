@@ -49,42 +49,11 @@
     </section>
     <section id="reviews">
         
-        <% if (user) { %>
-            <form id="add-review-form" method="POST" action="/users/<%= lookUpUser._id%>">
-                <label>Create a review:</label><br>
-                <textarea class="review-body" name="content"></textarea><br>
-                <label>Rate communication:
-                <select class="rating" name="communication">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5" selected>5</option>
-                </select></label><br>
-                <label>Rate cost:
-                <select class="rating" name="cost">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5" selected>5</option>
-                </select></label><br>
-                <label>Rate overall satisfaction:
-                <select class="rating" name="overall">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5" selected>5</option>
-                </select></label><br>
-                <input type="submit" value="Add Review">
-            </form>
-            <% } %>
-    </section>
-    <h2>Reviews</h2>
-    <section class="reviews-list">
-        <% if (user.reviews.length) { %>
-            <% user.reviews.forEach(function(r) { %>
+        
+        <section class="reviews-list">
+            <% if (lookUpUser.reviewsReceived) { %>
+                <h2>Reviews</h2>
+            <% lookUpUser.reviewsReceived.forEach(function(r) { %>
                 <section class="review">
                     <span class="picture">
                         <img alt="avatar" src="<%= r.userAvatar %>" referrerpolicy="no-referrer">

@@ -1,4 +1,120 @@
 <%- include('../partials/header') %>
+    <h2>OFFER DETAILS</h2>
 
+    <table class="offer-details" id="fromUS">
+        <tbody>
+            <tr>
+                <td>COURIER:</td>
+                <td class="picture">
+                    <img alt="avatar" src="<%= offer.userAvatar %>" referrerpolicy="no-referrer">
+                    <a href="/users/<%= offer.creator._id%>">
+                        <%= offer.userName %>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>COURIER'S RATING:</td>
+                <td>4.8</td>
+            </tr>
+            <tr>
+                <td>COURIER'S CONTACT:</td>
+                <td>
+                    <%= offerCreator.email%>
+                        <br>
+                        <%= offerCreator.phone%>
+                </td>
+            </tr>
+            <tr>
+                <td>DEPARTURE CITY:</td>
+                <td>
+                    <%= offer.departureCity%>
+                </td>
+            </tr>
+            <tr>
+                <td>TRANSIT CITY:</td>
+                <td>
+                    <%= offer.transitCity%>
+                </td>
+            </tr>
+            <tr>
+                <td>DESTINATION CITY:</td>
+                <td>
+                    <%= offer.destinationCity%>
+                </td>
+            </tr>
+            <tr>
+                <td>DEPARTURE DATE:</td>
+                <td><%=offer.departureDate.toLocaleDateString('en-us', { timeZone: 'GMT' , year:"numeric",
+                        month:"short", day:"numeric"})%></td>
+            </tr>
+            <tr>
+                <td>LAST DAY ACCEPTING<br> PACKAGES:</td>
+                <td><%=offer.cutoffDate.toLocaleDateString('en-us', { timeZone: 'GMT' ,year:"numeric", month:"short",
+                        day:"numeric"})%>
+                </td>
+            </tr>
+            <tr>
+                <td>PACKAGE AVAILABLE<br>AT THE DESTINATION:</td>
+                <td><%=offer.availDate.toLocaleDateString('en-us', { timeZone: 'GMT' ,year:"numeric", month:"short",
+                        day:"numeric"})%>
+                </td>
+            </tr>
+            <tr>
+                <td>PACKAGE ACCEPT<br>BY MAIL / AMAZON:</td>
+                <td>
+                    <%=offer.mail ? "YES" : "NO" %>
+                </td>
+            </tr>
+            <tr>
+                <td>ACCEPT ELECTRONICS:</td>
+                <td>
+                    <%=offer.electronics ? "YES" : "NO" %>
+                </td>
+            </tr>
+            <tr>
+                <td>OTHER DETAILS:</td>
+                <td>
+                    <%=offer.info%>
+                </td>
+            </tr>
+        <tbody>
+    </table>
+    <% let d=new Date() %>
+    <% let time=d.getTime() %>
+    <% let reviewOnTime=offer.departureDate.getTime() %>
+    <% if (reviewOnTime < time) {%>
+                    <% if (user ) { %>
+                        <form id="add-review-form" method="POST" action="/offers/<%= offer._id%>/reviews">
+                            <label>Create a review:</label><br>
+                            <textarea class="review-body" name="content"></textarea><br>
+                            <label>Rate communication:
+                                <select class="rating" name="communication">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5" selected>5</option>
+                                </select></label><br>
+                            <label>Rate cost:
+                                <select class="rating" name="cost">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5" selected>5</option>
+                                </select></label><br>
+                            <label>Rate overall satisfaction:
+                                <select class="rating" name="overall">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5" selected>5</option>
+                                </select></label><br>
+                            <input type="submit" value="Add Review">
+                        </form>
+                        <% } %>
+                            </section>
 
-<%- include('../partials/footer') %>
+<% } %>
+                            <%- include('../partials/footer') %>

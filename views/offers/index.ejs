@@ -1,26 +1,31 @@
 <%- include('../partials/header') %>
-
-    <% if (offers.length) { %>
+    <p class="service-description">FlyByExpress is created to help members of Belarussian immigrants community in the US
+        to connect with people who are flying to their home country and are willing to deliver packages and gifts to
+        their loved ones. The goal of the application is to provide a space, where user can publish an offer for package
+        delivery and other users can choose from the list of current offers. Offers are presented in two lists: from the
+        US and from Belarus. Please scroll down to see current offers and check out details for courier's contact,
+        rating and other delivery info. </p>
+    <% if (sortedOffers.length) { %>
         <table class="offer-list" id="fromUS">
             <thead>
                 <tr>
-                    <th>
-                        <h3>Offers for package delivery from the US</h3>
-                    </th>
+
+                    <h3>OFFERS FOR PACKAGE DELIVERY <span>FROM THE USA</span </h3>
+
                 </tr>
                 <tr>
-                    <th>Courier</th>
-                    <th>Departure<br>City</th>
-                    <th>Transit<br>City</th>
-                    <th>Destination<br>City</th>
-                    <th>Departure<br>Date</th>
-                    <th>Details</th>
+                    <th>COURIER</th>
+                    <th>DEPARTURE<br>CITY</th>
+                    <th>TRANSIT<br>CITY</th>
+                    <th>DESTINATION<br>CITY</th>
+                    <th>DEPARTURE<br>DATE</th>
+                    <th>DETAILS</th>
                 </tr>
             </thead>
             <tbody>
-            <% offers.forEach(function(offer) { %>
+                <% sortedOffers.forEach(function(offer) { %>
                     <% if (offer.direction==="from US" ) { %>
-                        <tr>
+                        <tr class="single-offer">
                             <td class="picture">
                                 <img alt="avatar" src="<%= offer.userAvatar %>" referrerpolicy="no-referrer">
                                 <a href="/users/<%= offer.creator._id%>">
@@ -36,45 +41,58 @@
                             <td>
                                 <%= offer.destinationCity %>
                             </td>
-                            <td>
-                                <%= offer.departureDate.toLocaleDateString('en-us', { year:"numeric", month:"short",
-                                    day:"numeric"}) %>
-                                    </h1>
-                                    %>
-                            </td>
-                            <td>
-                                <a href="/ofers/<%= offer._id%>">
-                                    More details
-                                </a>
-                            </td>
+                            <% let d=new Date() %>
+                                <% let time=d.getTime() %>
+                                    <% let flightTime=offer.departureDate.getTime() %>
+                                        <% if (flightTime < time) {%>
+                                            <td style="color:rgb(148, 147, 147);">
+                                                <%= offer.departureDate.toLocaleDateString('en-us', { timeZone: 'GMT' , year:"numeric",
+                                                    month:"short", day:"numeric"}) %>
+                            
+                                                    %>
+                                            </td>
+                                            <% }else { %>
+                                                <td>
+                                                    <%= offer.departureDate.toLocaleDateString('en-us', {
+                                                        timeZone: 'GMT',
+                                                        year:"numeric", month:"short", day:"numeric"}) %>
+
+                                                        %>
+                                                </td>
+                                                <% }%>
+                                                    <td>
+                                                        <a href="/offers/<%= offer._id%>">
+                                                            More details
+                                                        </a>
+                                                    </td>
                         </tr>
-                    <% } %>
-            <% }) %>
-                </tbody>
+                        <% } %>
+                            <% }) %>
+            </tbody>
         </table>
-<br>
-<br>
-<br>
+        <br>
+        <br>
+        <br>
         <table class="offer-list" id="fromBelarus">
             <thead>
                 <tr>
-                    <th>
-                        <h3>Offers for package delivery from Belarus</h3>
-                    </th>
+
+                    <h3>OFFERS FOR PACKAGE DELIVERY <span>FROM BELARUS</span></h3>
+
                 </tr>
                 <tr>
-                    <th>Courier</th>
-                    <th>Departure<br>City</th>
-                    <th>Transit<br>City</th>
-                    <th>Destination<br>City</th>
-                    <th>Departure<br>Date</th>
-                    <th>Details</th>
+                    <th>COURIER</th>
+                    <th>DEPARTURE<br>CITY</th>
+                    <th>TRANSIT<br>CITY</th>
+                    <th>DESTINATION<br>CITY</th>
+                    <th>DEPARTURE<br>DATE</th>
+                    <th>DETAILS</th>
                 </tr>
             </thead>
             <tbody>
-                <% offers.forEach(function(offer) { %>
+                <% sortedOffers.forEach(function(offer) { %>
                     <% if (offer.direction==="from Belarus" ) { %>
-                        <tr>
+                        <tr class="single-offer">
                             <td class="picture">
                                 <img alt="avatar" src="<%= offer.userAvatar %>" referrerpolicy="no-referrer">
                                 <a href="/users/<%= offer.creator._id%>">
@@ -90,24 +108,39 @@
                             <td>
                                 <%= offer.destinationCity %>
                             </td>
-                            <td>
-                                <%= offer.departureDate.toLocaleDateString('en-us', { year:"numeric", month:"short",
-                                    day:"numeric"}) %>
-                                    </h1>
-                                    %>
-                            </td>
-                            <td>
-                                <a href="/ofers/<%= offer._id%>">
-                                    More details
-                                </a>
-                            </td>
+                            <% let d=new Date() %>
+                                <% let time=d.getTime() %>
+                                    <% let flightTime=offer.departureDate.getTime() %>
+                                        <% if (flightTime < time) {%>
+                                            <td style="color:rgb(148, 147, 147);">
+                                                <%= offer.departureDate.toLocaleDateString('en-us', { 
+                                                    timeZone: 'GMT',
+                                                    year:"numeric",
+                                                    month:"short", day:"numeric"}) %>
+
+                                                    %>
+                                            </td>
+                                            <% }else { %>
+                                                <td>
+                                                    <%= offer.departureDate.toLocaleDateString('en-us', {
+                                                        timeZone: 'GMT',
+                                                        year:"numeric", month:"short", day:"numeric"}) %>
+
+                                                        %>
+                                                </td>
+                                                <% }%>
+                                                    <td>
+                                                        <a href="/offers/<%= offer._id%>">
+                                                            More details
+                                                        </a>
+                                                    </td>
                         </tr>
-                    <% } %>
-                <% }) %>
+                        <% } %>
+                            <% }) %>
             </tbody>
         </table>
 
-    <% } else { %>
+        <% } else { %>
             <h2>No Offers Yet</h2>%>
             <% } %>
                 <%- include('../partials/footer') %>
