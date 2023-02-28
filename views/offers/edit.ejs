@@ -4,11 +4,11 @@
         <label>Choose direction:</label>
         <select name="direction">
             <% if (offer.direction==="from Belarus" ) {%>
-                <option selected>from Belarus</option>
-                <option>from US</option>
+                <option selected value="from Belarus">from Belarus</option>
+                <option value="from US">from US</option>
                 <%} else {%>
-                    <option>from Belarus</option>
-                    <option selected>from US</option>
+                    <option value="from Belarus">from Belarus</option>
+                    <option value="from US" selected>from US</option>
                     <%}%>
         </select>
 
@@ -34,25 +34,25 @@
         <label>Accept packages by mail/amazon:</label>
         <% if (offer.mail) {%>
             <select name="mail">
-                <option selected>Yes</option>
-                <option>No</option>
+                <option value="true" selected>Yes</option>
+                <option value="false">No</option>
             </select>
             <%} else {%>
                 <select name="mail">
-                    <option>Yes</option>
-                    <option selected>No</option>
+                    <option value="true">Yes</option>
+                    <option value="false" selected>No</option>
                 </select>
                 <%}%>
                 <label>Accept electronics:</label>
                 <% if (offer.electronics) {%>
                     <select name="electronics">
-                        <option selected>Yes</option>
-                        <option>No</option>
+                        <option value="true" selected>Yes</option>
+                        <option value="false">No</option>
                     </select>
                 <%} else {%>
                         <select name="electronics">
-                            <option >Yes</option>
-                            <option selected>No</option>
+                            <option value="true">Yes</option>
+                            <option value="false" selected>No</option>
                         </select>
                     <%}%>
                         <label>Additional information:</label>

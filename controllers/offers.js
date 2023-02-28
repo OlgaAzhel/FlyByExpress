@@ -103,12 +103,28 @@ function intoDateString(string) {
     return arr.join("-")
 
 }
+function update(req,res) {
+
+    console.log(req.body)
+        Offer.findById(req.params.id, function(err, offer) {
+            Object.assign(offer, req.body)
+            offer.save(function(err) {
+
+
+            })
+
+            
+            console.log(offer)
+            res.redirect(`/offers/${req.params.id}`)
+        })
+}
 
 module.exports = {
     new: newOffer,
     create,
     show,
     index,
-    edit
+    edit,
+    update
     // delete: deleteReview
 };
