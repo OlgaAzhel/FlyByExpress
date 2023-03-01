@@ -85,17 +85,19 @@
             </tr>
         <tbody>
     </table>
-    <% if (user.googleId===offerCreator.googleId) { %>
-        <button class="edit"><a href="/offers/<%=offer.id%>/edit">EDIT OFFER</a></button>
 
-        <form action="/offers/<%= offer._id %>?_method=DELETE" method="POST" ">
+    <% let d=new Date() %>
+        <% let time=d.getTime() %>
+        <% let offerTime=offer.availDate.getTime() %>
+            <% if (user.googleId===offerCreator.googleId && offerTime > time ) { %>
+                <button class="edit"><a href="/offers/<%=offer.id%>/edit">EDIT OFFER</a></button>
+
+                <form action="/offers/<%= offer._id %>?_method=DELETE" method="POST" ">
             
-            <button class="delete" type="submit">❌DELETE OFFER</button>
-        </form>
-        <% } %>
+            <button class=" delete" type="submit">❌DELETE OFFER</button>
+                </form>
+                <% } %>
 
-            <% let d=new Date() %>
-                <% let time=d.getTime() %>
                     <% let reviewOnTime=offer.departureDate.getTime() %>
                         <% if (reviewOnTime < time) {%>
                             <% if (user) { %>
@@ -141,9 +143,11 @@
                                                 <% reviews.forEach(function(r) { %>
                                                     <section class="review">
                                                         <span class="delete-btn">
-<% if (user.name === r.userName) {%>
-                                                                <form action="/reviews/<%= r._id%>?_method=DELETE" method="POST">
-                                                                    <input type="text" name="offer" value="<%= offer._id%>" class="hidden">
+                                                            <% if (user.name===r.userName) {%>
+                                                                <form action="/reviews/<%= r._id%>?_method=DELETE"
+                                                                    method="POST">
+                                                                    <input type="text" name="offer"
+                                                                        value="<%= offer._id%>" class="hidden">
                                                                     <button id="delete-review" type="submit">❌</button>
                                                                     <span class="hide">DELETE REVIEW</span>
                                                                 </form>

@@ -29,6 +29,12 @@ const reviewSchema = new Schema({
         ref: 'Offer',
     },
 
+    offerCreator: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User',

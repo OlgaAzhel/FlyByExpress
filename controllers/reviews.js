@@ -15,6 +15,7 @@ function create(req, res) {
 
     Offer.findById(req.params.id, function (err, offer) {
         req.body.offer = offer
+        req.body.offerCreator = offer.creator
         const review = new Review(req.body)
         review.save(function (err) {
             if (err) return res.redirect('/offers')

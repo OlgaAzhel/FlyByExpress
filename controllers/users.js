@@ -11,7 +11,7 @@ function show(req, res) {
 
     User.findById(req.params.id, function (err, lookUpUser) {
 
-        Review.find({ user: lookUpUser }, function (err, reviews) {
+        Review.find({ offerCreator: lookUpUser }, function (err, reviews) {
             let reviewsNumber = reviews.length
             let totalScore = 0
             reviews.forEach((review) => {

@@ -35,14 +35,20 @@ function show(req, res) {
     Offer.findById(req.params.id, function (err, offer) {
         Review.find({ offer: offer }, function (err, reviews) {
             User.findById(offer.creator._id, function (err, offerCreator) {
-                Review.find({ user: offerCreator }, function (err, couriersReviews) {
+                // let creatorName = offerCreator.name
+                Review.find({ offerCreator: offerCreator }, function (err, couriersReviews) {
+                    console.log("REVIEWS FOR THIS COURIER:",offerCreator.name, couriersReviews)
                     let totalScore = 0
-                    couriersReviews.forEach((review) => {
-                        totalScore += review.communication
-                        totalScore += review.cost
-                        totalScore += review.overall
-                    })
-                    let couriersRating = totalScore / 3 / couriersReviews.length
+                    let couriersRating
+                    if(couriersReviews) {
+                        couriersReviews.forEach((review) => {
+                            totalScore += review.communication
+                            totalScore += review.cost
+                            totalScore += review.overall
+                        })
+                        couriersRating = totalScore / 3 / couriersReviews.length
+
+                    }
 
 
                     res.render('offers/show', { title: 'Offer Details', offer, offerCreator, reviews, couriersRating })

@@ -4,7 +4,7 @@ const passport = require('passport');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'All Offers' });
+  res.redirect('/offers');
 });
 
 // Google OAuth login route
@@ -30,7 +30,7 @@ router.get('/oauth2callback', passport.authenticate(
 // OAuth logout route
 router.get('/logout', function (req, res) {
   req.logout(function () {
-    res.redirect('/');
+    res.redirect('/offers');
   });
 });
 
