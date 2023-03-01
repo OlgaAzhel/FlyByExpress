@@ -151,14 +151,16 @@ body h2 {
 
 button,
 input[type="submit"] {
+  display: inline;
   margin-top: 5px;
-  min-width: 250px;
+  min-width: 180px;
   max-width: 300px;
   height: 35px;
   border: 2px solid #7ed5eb;
   border-radius: 4px;
-  background-color: #7ed5eb;
-  color: white;
+  font-size: 15px;
+  background-color: #d5ebf1;
+  color: rgb(97, 97, 97);
   box-shadow: 3px 3px 2px 1px rgba(66, 71, 72, .2);
 }
 
@@ -166,6 +168,12 @@ button:hover,
 input[type="submit"]:hover {
   font-weight: bold;
 
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .reviews-list {
@@ -341,29 +349,14 @@ h2>span {
   width: 150px
 }
 
-.edit {
-  font-size: 15px;
-  background-color: #d5ebf1;
 
-}
 
 .edit>a,
 .delete>a {
   text-decoration: none;
-
-
 }
 
-.delete {
-  font-size: 15px;
-  background-color: #d5ebf1;
 
-}
-
-.delete-btn {
-  max-width: 30px;
-
-}
 
 #delete-review {
   margin-top: 20px;
@@ -377,10 +370,15 @@ h2>span {
   font-size: xx-small;
 }
 
-#delete-review:hover + .hide {
-    display: block;
-      color: red;
+#delete-review:hover+.hide {
+  display: block;
+  color: red;
 }
+
 .hidden {
   display: none;
+}
+
+h3 {
+  text-align: center;
 }

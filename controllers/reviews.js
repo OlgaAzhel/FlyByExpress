@@ -18,7 +18,7 @@ function create(req, res) {
         req.body.offerCreator = offer.creator
         const review = new Review(req.body)
         review.save(function (err) {
-            if (err) return res.redirect('/offers')
+            res.redirect(`/offers/${req.params.id}`)
         });
         console.log("REVIEW", review)
     })
