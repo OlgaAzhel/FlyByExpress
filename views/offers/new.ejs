@@ -24,20 +24,15 @@
 
         <label>Package arrived and available day:</label>
         <input type="date" name="availDate">
-
-        <label>Accept packages by mail/amazon:</label>
-        <select name="mail">
-            <option value="true" selected>Yes</option>
-            <option value="false">No</option>
-        </select>
-
-        <label>Accept electronics:</label>
-        <select name="electronics">
-            <option value="true" selected>Yes</option>
-            <option value="false" >No</option>
-        </select>
-
-        <label >Additional information:</label>
+        <br>
+        <label>
+            <input type="checkbox" name="mail">
+            Accept packages by mail/amazon</label>
+        <label>
+            <input type="checkbox" name="electronics">
+            Accept electronics</label>
+        <br>
+        <label >Additional information</label>
         <input type="text" name="info" class="add-info">
 
         <input type="submit" value="Add Delivery Offer" >

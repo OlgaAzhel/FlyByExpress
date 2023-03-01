@@ -14,7 +14,13 @@
             </tr>
             <tr class="single-offer">
                 <td class="header-col">COURIER'S RATING:</td>
-                <td>4.8</td>
+                <% if (couriersRating) {%>
+                    <td>
+                        <%= Math.round(couriersRating*100)/100%>
+                    </td>
+                    <%} else {%>
+                        <td class="header-col"></td>
+                        <%}%>
             </tr>
             <tr class="single-offer">
                 <td class="header-col">COURIER'S CONTACT:</td>
@@ -81,13 +87,18 @@
     </table>
     <% if (user.googleId===offerCreator.googleId) { %>
         <button class="edit"><a href="/offers/<%=offer.id%>/edit">EDIT OFFER</a></button>
-        <%} %>
+
+        <form action="/offers/<%= offer._id %>?_method=DELETE" method="POST" ">
+            
+            <button class="delete" type="submit">❌DELETE OFFER</button>
+        </form>
+        <% } %>
 
             <% let d=new Date() %>
                 <% let time=d.getTime() %>
                     <% let reviewOnTime=offer.departureDate.getTime() %>
                         <% if (reviewOnTime < time) {%>
-                            <% if (user ) { %>
+                            <% if (user) { %>
                                 <form id="add-review-form" method="POST" action="/offers/<%= offer._id%>/reviews">
                                     <label>
                                         <h2>CREATE A REVIEW:</h2>
@@ -117,7 +128,7 @@
                                             <option value="4">4</option>
                                             <option value="5" selected>5</option>
                                         </select></label><br>
-                                    <input type="submit" value="Add Review">
+                                    <input type="submit" value="ADD REVIEW">
                                 </form>
                                 <% } %>
                                     </section>
@@ -125,18 +136,27 @@
 
 
                                         <section class="reviews-list">
-                                            <% if (reviews) { %>
+                                            <% if (reviews.length>= 1) { %>
                                                 <h2>REVIEWS:</h2>
                                                 <% reviews.forEach(function(r) { %>
                                                     <section class="review">
+                                                        <span class="delete-btn">
+<% if (user.name === r.userName) {%>
+                                                                <form action="/reviews/<%= r._id%>?_method=DELETE" method="POST">
+                                                                    <input type="text" name="offer" value="<%= offer._id%>" class="hidden">
+                                                                    <button id="delete-review" type="submit">❌</button>
+                                                                    <span class="hide">DELETE REVIEW</span>
+                                                                </form>
+                                                                <% } %>
+                                                        </span>
                                                         <span class="picture">
-                                                            <a href="/offers/<%= r.offer%>">
-                                                                DELIVERY OFFER
-                                                            </a>
                                                             <img alt="avatar" src="<%= r.userAvatar %>"
                                                                 referrerpolicy="no-referrer">
                                                             <a href="/users/<%= r.user._id%>">
                                                                 <%= r.userName %>
+                                                            </a>
+                                                            <a href="/offers/<%= r.offer%>">
+                                                                DELIVERY OFFER
                                                             </a>
                                                         </span>
                                                         <span class="delivery-review">
@@ -176,12 +196,15 @@
                                                                 </tr>
                                                             </table>
                                                         </span>
+
                                                     </section>
                                                     <% }); %>
-                                                        <% }; %>
+                                                        <% } else {%>
+                                                            <h4>NO REVIEWS YET</h4>
+                                                            <% } %>
 
-                                                            </tbody>
-                                                            </table>
+                                                                </tbody>
+                                                                </table>
                                         </section>
 
                                         <%- include('../partials/footer') %>

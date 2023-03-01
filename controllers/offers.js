@@ -9,26 +9,23 @@ function newOffer(req, res) {
 
 function create(req, res) {
     console.log("Offer create running...")
-    console.log("CREATOR:", req.user.offers)
     req.body.creator = req.user._id
     req.body.userName = req.user.name;
     req.body.userAvatar = req.user.avatar;
 
+    req.body.mail = !!req.body.mail
+    req.body.electronics = !!req.body.electronics
+
     const offer = new Offer(req.body)
 
-    User.findById(req.user._id, function (err, theUser) {
-        theUser.offers.push(offer)
-        theUser.save(function (err) {
-        })
-    })
+    // User.findById(req.user._id, function (err, theUser) {
+    //     theUser.offers.push(offer)
+    //     theUser.save(function (err) {
+    //     })
+    // })
 
-    console.log("offer and updated req body", offer, req.body)
     offer.save(function (err) {
-        if (err) {
-            res.redirect('offers/new/')
-        } else {
-            res.redirect('offers/')
-        }
+        res.redirect('offers/')
     })
 
 }
@@ -38,7 +35,19 @@ function show(req, res) {
     Offer.findById(req.params.id, function (err, offer) {
         Review.find({ offer: offer }, function (err, reviews) {
             User.findById(offer.creator._id, function (err, offerCreator) {
-                res.render('offers/show', { title: 'Offer Details', offer, offerCreator, reviews })
+                Review.find({ user: offerCreator }, function (err, couriersReviews) {
+                    let totalScore = 0
+                    couriersReviews.forEach((review) => {
+                        totalScore += review.communication
+                        totalScore += review.cost
+                        totalScore += review.overall
+                    })
+                    let couriersRating = totalScore / 3 / couriersReviews.length
+
+
+                    res.render('offers/show', { title: 'Offer Details', offer, offerCreator, reviews, couriersRating })
+
+                })
             })
 
         })
@@ -59,8 +68,10 @@ function index(req, res) {
     })
 }
 
-function edit(req,res) {
-    Offer.findById(req.params.id, function(err, offer) {
+function edit(req, res) {
+    req.body.mail = !!req.body.mail
+    req.body.electronics = !!req.body.electronics
+    Offer.findById(req.params.id, function (err, offer) {
         let departureDateString = offer.departureDate.toLocaleDateString('en-us', {
             timeZone: 'GMT',
             year: "numeric", month: "numeric", day: "numeric"
@@ -103,20 +114,47 @@ function intoDateString(string) {
     return arr.join("-")
 
 }
-function update(req,res) {
+function update(req, res) {
 
     console.log(req.body)
-        Offer.findById(req.params.id, function(err, offer) {
-            Object.assign(offer, req.body)
-            offer.save(function(err) {
+    Offer.findById(req.params.id, function (err, offer) {
+        Object.assign(offer, req.body)
+        offer.save(function (err) {
 
 
-            })
-
-            
-            console.log(offer)
-            res.redirect(`/offers/${req.params.id}`)
         })
+
+
+        console.log(offer)
+        res.redirect(`/offers/${req.params.id}`)
+    })
+}
+
+function deleteOffer(req, res) {
+    console.log("DElete offer controller run", req.params.id)
+    // Offer.find({ _id: req.params.id }, function (err, offer) {
+    //     console.log("OFFER:", offer)
+    //     User.find({ creator: offer.creator }, function (err, offerCreator) {
+    //         console.log("OFFER CREATOR:", offerCreator)
+    //         let offersArray = offerCreator.offers
+    //         console.log("OFFER CREATOR's OFFERS:", offerCreator.offers)
+    //         let index = offersArray.findIndex(offer)
+    //         console.log("INDEX of THE OFFER TO DELETE:", index)
+    //         offersArray.splice(index, 1)
+    //         offerCreator.offers = offersArray
+    //         offerCreator.save(function (err) {
+    //             console.log("Offers inside offerCreator updated")
+    //         })
+    //     })
+    // })
+
+    Offer.deleteOne({ _id: req.params.id }, function (err, offer) {
+
+    })
+    Review.deleteMany({ offer: req.params.id }, function (err, reviews) {
+        console.log("Offer reviews are being removed:", reviews)
+        res.redirect('/offers')
+    })
 }
 
 module.exports = {
@@ -125,6 +163,6 @@ module.exports = {
     show,
     index,
     edit,
-    update
-    // delete: deleteReview
+    update,
+    delete: deleteOffer
 };

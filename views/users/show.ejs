@@ -37,7 +37,10 @@
                     <tr class="single-offer">
                         <td class="header-cell">RATING:</td>
                         <td>
+                            <% if(rating) {%>
                             <%= Math.round(rating*100)/100 %>
+                            <%} else {%>    
+                            <%}%>
                         </td>
                     </tr>
 
@@ -56,16 +59,16 @@
 
         <section class="reviews-list">
             <% if (reviews) { %>
-                <h2>REVIEWS</h2>
+                <h2>REVIEWS:</h2>
                 <% reviews.forEach(function(r) { %>
                     <section class="review">
                         <span class="picture">
-                            <a href="/offers/<%= r.offer%>">
-                                DELIVERY OFFER
-                            </a>
                             <img alt="avatar" src="<%= r.userAvatar %>" referrerpolicy="no-referrer">
                             <a href="/users/<%= r.user._id%>">
                                 <%= r.userName %>
+                            </a>
+                            <a href="/offers/<%= r.offer%>">
+                                DELIVERY OFFER
                             </a>
                         </span>
                         <span class="delivery-review">
