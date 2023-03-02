@@ -166,9 +166,8 @@
                                                                 <a href="/users/<%= r.user._id%>">
                                                                     <%= r.userName %>
                                                                 </a>
-                                                                <a href="/offers/<%= r.offer%>">
-                                                                    DELIVERY OFFER
-                                                                </a>
+                                                                <%= r.createdAt.toLocaleDateString('en-us', { timeZone: 'GMT' ,year:"numeric", month:"short",
+                        day:"numeric"}) %>
                                                             </span>
                                                             <span class="delivery-review">
 

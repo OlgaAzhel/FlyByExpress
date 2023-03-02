@@ -1,5 +1,5 @@
 <%- include('../partials/header') %>
-
+<h3>USER INFORMATION:</h3>
     <section id="profile">
         <span class="photo">
             <img class="userAv" alt="avatar" src="<%= lookUpUser.avatar %>" referrerpolicy="no-referrer">
@@ -35,7 +35,7 @@
                                 <a href="/offers/<%= offer._id %>" class="offer-link">
                                     <%=offer.departureDate.toLocaleDateString('en-us', { timeZone: 'GMT' ,
                                         year:"numeric", month:"numeric", day:"numeric"})%>
-                                </a><br>
+                                </a>▫️
 
                                 <%})%>
                         </td>

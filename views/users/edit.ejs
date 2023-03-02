@@ -1,5 +1,5 @@
 <%- include('../partials/header') %>
-
+<h3>EDIT CONTACT INFO:</h3>
     <section id="profile">
         <span class="photo">
             <img class="userAv" alt="avatar" src="<%= lookUpUser.avatar %>" referrerpolicy="no-referrer">
@@ -10,48 +10,43 @@
         <span class="edit-user-info">
 
             <form id="update-user" action="/users/<%= lookUpUser.id%>?_method=PUT" method="POST">
-            <div class="line-info">
-                <label class="header-cell">EMAIL:</label>
-                <input type="text" name="email" value="<%=lookUpUser.email%>">
-            </div>
-            <div class="line-info">
-                <label class="header-cell">PHONE:</td>             
-                    <input type="text" name="phone" value="<%=lookUpUser.phone%>">             
                 <div class="line-info">
-                    <label class="header-cell">OTHER:</td>
+                    <label class="header-cell">EMAIL:</label>
+                    <input type="text" name="email" value="<%=lookUpUser.email%>">
+                </div>
+                <div class="line-info">
+                    <label class="header-cell">PHONE:</label>
+                    <input type="text" name="phone" value="<%=lookUpUser.phone%>">
+                </div>
+                <div class="line-info">
+                    <label class="header-cell">OTHER:</label>
                     <input type="text" name="additionalContact" value="<%=lookUpUser.additionalContact%>">
                 </div>
                 <div class="line-info">
-                    <label class="edit">
-                        <input type="submit" value="UPDATE USER">
-                        </form>
-                    </label>
-                </div>
-                <div class="line-info">
-                    <td class="header-cell">DELIVERIES:</td>
-                    <td>
-                        <% offers.forEach((offer)=> { %>
-                            <a href="/offers/<%= offer._id %>" class="offer-link">
-                                <%=offer.departureDate.toLocaleDateString('en-us', { timeZone: 'GMT' , year:"numeric",
-                                    month:"numeric", day:"numeric"})%>
-                            </a><br>
+                    <label class="header-cell">DELIVERIES:</label>
+                    
+                    <% offers.forEach((offer)=> { %>
+                        <a href="/offers/<%= offer._id %>" class="offer-link">
+                            <%=offer.departureDate.toLocaleDateString('en-us', { timeZone: 'GMT' , year:"numeric",
+                                month:"numeric", day:"numeric"})%>
+                        </a>▫️
+                        <%})%>
+                    
 
-                            <%})%>
-                    </td>
                 </div>
                 <div class="line-info">
-                    <td class="header-cell">RATING:</td>
-                    <td>
+                    <label class="header-cell">RATING:</label>
+                    <span>
                         <% if(rating) {%>
                             <%= Math.round(rating*100)/100 %>
                                 <%} else {%>
                                     <%}%>
-                    </td>
+                    </span>
                 </div>
-
-
-                </tbody>
-                </table>
+                <div class="edit">
+                    <input type="submit" value="UPDATE USER">
+</div>
+            </form>
         </span>
     </section>
 

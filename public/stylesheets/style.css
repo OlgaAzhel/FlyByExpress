@@ -81,9 +81,7 @@ body h2 {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: flex-end;
-
-
+  align-items: flex-start;
 }
 
 .photo {
@@ -152,7 +150,7 @@ button,
 input[type="submit"] {
   display: inline;
   margin-top: 5px;
-  min-width: 180px;
+  min-width: 190px;
   max-width: 300px;
   height: 35px;
   border: 2px solid #7ed5eb;
@@ -167,6 +165,10 @@ button:hover,
 input[type="submit"]:hover {
   font-weight: bold;
 
+}
+
+button > a {
+  text-decoration: none;
 }
 
 .buttons {
@@ -390,4 +392,37 @@ h3 {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+}
+
+.edit-user-info {
+  width: 600px;
+}
+
+.line-info {
+  background-color: #d5ebf1;
+  border: 1px solid white;
+
+  font-size: 16px;
+  display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+
+.line-info > label {
+  display: inline-block;
+  height: 100%;
+  border-right: 2px solid white;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 2px;
+}
+
+.line-info>span,.line-info>input{
+  display: inline-block;
+  height: 100%;
+  width: 300px;
+  padding-left: 2px;
 }
