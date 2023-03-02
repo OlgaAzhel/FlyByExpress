@@ -122,7 +122,6 @@ body h2 {
 }
 
 #add-review-form {
-  margin: 10px;
   min-width: 800px;
   display: flex;
   flex-direction: column;
@@ -299,7 +298,7 @@ th {
 
 h2 {
   font-weight: 400;
-  margin: 5px
+  margin: 20px
 }
 
 h2>span {
@@ -381,4 +380,14 @@ h2>span {
 
 h3 {
   text-align: center;
+}
+
+.delete-btn {
+  width: 40px
+}
+
+.edit {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }

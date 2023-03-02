@@ -23,14 +23,20 @@
                         </td>
                     </tr>
                     <tr class="single-offer">
+                        <td class="header-cell">OTHER:</td>
+                        <td>
+                            <%= lookUpUser.additionalContact %>
+                        </td>
+                    </tr>
+                    <tr class="single-offer">
                         <td class="header-cell">DELIVERIES:</td>
                         <td>
                             <% offers.forEach((offer)=> { %>
-                                 <a href="/offers/<%= offer._id %>" class="offer-link">
-                                <%=offer.departureDate.toLocaleDateString('en-us', { timeZone: 'GMT' ,
-                                        year:"numeric", month:"numeric", day:"numeric"})%> 
+                                <a href="/offers/<%= offer._id %>" class="offer-link">
+                                    <%=offer.departureDate.toLocaleDateString('en-us', { timeZone: 'GMT' ,
+                                        year:"numeric", month:"numeric", day:"numeric"})%>
                                 </a><br>
-                                
+
                                 <%})%>
                         </td>
                     </tr>
@@ -38,27 +44,31 @@
                         <td class="header-cell">RATING:</td>
                         <td>
                             <% if(rating) {%>
-                            <%= Math.round(rating*100)/100 %>
-                            <%} else {%>    
-                            <%}%>
+                                <%= Math.round(rating*100)/100 %>
+                                    <%} else {%>
+                                        <%}%>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td class="edit">
+                            <% if (user.googleId===lookUpUser.googleId) { %>
+                                <button><a href="/users/<%=user.id%>/edit">EDIT CONTACT INFO</a></button>
+                                <%} %>
                         </td>
                     </tr>
 
                 </tbody>
             </table>
-                    </span>
-                    </section>
-                                <% if (user.googleId===lookUpUser.googleId) { %>
-
-                                            <button class="edit">EDIT CONTACT INFO</button>
-
-                                    <%} %>
+        </span>
+    </section>
 
     <section id="reviews">
 
 
         <section class="reviews-list">
-            <% if (reviews.length > 0) { %>
+            <% if (reviews.length> 0) { %>
                 <h2>REVIEWS:</h2>
                 <% reviews.forEach(function(r) { %>
                     <section class="review">
@@ -112,10 +122,10 @@
                     <% }); %>
                         <% } else { %>
                             <h3>NO REVIEWS YET</h3>
-                        <% } %>
+                            <% } %>
 
-                            </tbody>
-                            </table>
+                                </tbody>
+                                </table>
         </section>
 
         <%- include('../partials/footer') %>

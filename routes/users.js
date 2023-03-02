@@ -12,4 +12,8 @@ router.get('/', function(req, res, next) {
 
 router.get('/:id', ensureLoggedIn, usersCtrl.show)
 
+router.get('/:id/edit', ensureLoggedIn, usersCtrl.edit)
+
+router.put('/:id/', ensureLoggedIn, usersCtrl.update);
+
 module.exports = router;

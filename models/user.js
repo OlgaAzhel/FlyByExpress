@@ -11,6 +11,7 @@ const userSchema = new Schema({
     },
     email: String,
     phone: String,
+    additionalContact: String,
     avatar: String,
     reviewsReceived: [{
         type: Schema.Types.ObjectId,
