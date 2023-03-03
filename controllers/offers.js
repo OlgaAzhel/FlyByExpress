@@ -3,9 +3,7 @@ const User = require('../models/user');
 const Review = require('../models/review');
 
 function newOffer(req, res) {
-    let listOfErrors = []
-    res.render('offers/new', { title: 'Add New Delivery offer',
-        listOfErrors });
+    res.render('offers/new', { title: 'Add New Delivery offer' });
 }
 
 
@@ -31,15 +29,22 @@ function create(req, res) {
             console.log("THIS IS ERROR OBJECT:", err, err.name)
             
             let listOfErrors = []
+            let errorKeys = []
             Object.keys(err.errors).forEach((key) => {
-                
+                errorKeys.push(key)
                 listOfErrors.push(err.errors[key].message);
 
             });
-            console.log(listOfErrors)
-            res.render('offers/new', {
-                title: 'Add New Delivery offer',
-                listOfErrors
+            errorKeys.forEach((key) => {
+                req.body[key] = ""
+            })
+            let currentInputObj = req.body
+            console.log(req.body)
+            res.render('offers/error', {
+                title: 'Fix Error - Adding New Delivery offer',
+                listOfErrors,
+                currentInputObj,
+                errorKeys
             });
         } else {
             res.redirect('offers/')

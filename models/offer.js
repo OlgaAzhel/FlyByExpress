@@ -42,11 +42,11 @@ const offerSchema = new Schema({
         type: Date,
         required: true,
         validate: {
-            validator: function (v) {
+            validator: function (input) {
                 return (
-                    v && // check that there is a date object
-                    v.getTime() > Date.now() + 24 * 60 * 60 * 1000 &&
-                    v.getTime() < Date.now() + 365 * 24 * 60 * 60 * 1000
+                    input && // check that there is a date object
+                    input.getTime() > Date.now() + 24 * 60 * 60 * 1000 &&
+                    input.getTime() < Date.now() + 365 * 24 * 60 * 60 * 1000
                 );
             },
             message:
@@ -58,11 +58,12 @@ const offerSchema = new Schema({
         type: Date,
         required: true,
         validate: {
-            validator: function (v) {
+            validator: function (input) {
                 return (
-                    v && // check that there is a date object
-                    v.getTime() <= this.departureDate.getTime() &&
-                    v.getTime() >= Date.now()
+                    input && // check that there is a date object
+                    input.getTime() <= this.departureDate.getTime() &&
+                    input.getTime() >= Date.now() &&
+                    input.getTime() < Date.now() + 365 * 24 * 60 * 60 * 1000
                 );
             },
             message:
@@ -73,11 +74,11 @@ const offerSchema = new Schema({
         type: Date,
         required: true,
         validate: {
-            validator: function (v) {
+            validator: function (input) {
                 return (
-                    v && // check that there is a date object
-                    v.getTime() >= this.departureDate.getTime() &&
-                    v.getTime() <= this.departureDate.getTime() + 30 * 24 * 60 * 60 * 1000
+                    input && // check that there is a date object
+                    input.getTime() >= this.departureDate.getTime() &&
+                    input.getTime() <= this.departureDate.getTime() + 30 * 24 * 60 * 60 * 1000
                 );
             },
             message:

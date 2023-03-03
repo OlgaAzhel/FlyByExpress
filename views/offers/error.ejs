@@ -1,0 +1,67 @@
+<%- include('../partials/header') %>
+
+    <h2>CREATE A NEW DELIVERY OFFER:</h2>
+    <% if (listOfErrors){%>
+        <% listOfErrors.forEach((el)=>{ %>
+            <span class="fix-errors">
+                ❗️<%= el %>
+            </span><br>
+            <%})%>
+                <%}%>
+                    <p>
+                        <%=currentInputObj.direction %>
+                    </p>
+                    <h2>CREATE A NEW DELIVERY OFFER:</h2>
+
+                    <form id="new-offer" action="/offers" method="POST">
+                        <label>Choose direction:</label>
+                        <select name="direction">
+                            <% if (currentInputObj.direction==="from Belarus") {%>
+                                <option value="from Belarus" selected>from Belarus</option>
+                                <option value="from US">from US</option>
+                                <%} else {%>
+                                <option value="from Belarus" >from Belarus</option>
+                                <option value="from US" selected>from US</option>
+                            <%}%>
+                        </select>
+
+                        <label>Departure City:</label>
+                        <input type="text" name="departureCity" value="<%=currentInputObj.departureCity%>" >
+
+                        <label>Transit City:</label>
+                        <input type="text" name="transitCity" value="<%=currentInputObj.transitCity%>">
+
+                        <label>Destination City:</label>
+                        <input type="text" name="destinationCity" value="<%=currentInputObj.destinationCity%>">
+
+                        <label>Departs:</label>
+                        <input type="date" name="departureDate" value="<%=currentInputObj.departureDate%>">
+
+                        <label>Package accept last day:</label>
+                        <input type="date" name="cutoffDate" value="<%=currentInputObj.cutoffDate%>">
+
+                        <label>Package arrived and available day:</label>
+                        <input type="date" name="availDate" value="<%=currentInputObj.availDate%>">
+                        <br>
+                        <label>
+                            <% if (currentInputObj.mail) {%>
+                            <input type="checkbox" name="mail" checked>
+                            <%} else {%>
+                                <input type="checkbox" name="mail">
+                                <%}%>
+                            Accept packages by mail/amazon</label>
+                        <label>
+                            <% if (currentInputObj.electronics) {%>
+                            <input type="checkbox" name="electronics" checked>
+                            <%} else {%>
+                            <input type="checkbox" name="electronics">
+                            <%}%>
+                            Accept electronics</label>
+                        <br>
+                        <label>Additional information</label>
+                        <input type="text" name="info" class="add-info" value="<%=currentInputObj.info%>">
+
+                        <input type="submit" value="Add Delivery Offer">
+                    </form>
+
+                    <%- include('../partials/footer') %>

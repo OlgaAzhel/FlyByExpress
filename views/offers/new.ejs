@@ -1,13 +1,6 @@
 <%- include('../partials/header') %>
 
     <h2>CREATE A NEW DELIVERY OFFER:</h2>
-    <% if (listOfErrors){%>
-    <% listOfErrors.forEach((el)=>{ %>
-        <span class="fix-errors">
-            ❗️<%= el %>
-        </span><br>
-        <%})%>
-        <%}%>
 
     <form id="new-offer" action="/offers" method="POST">
         <label>Choose direction:</label>
