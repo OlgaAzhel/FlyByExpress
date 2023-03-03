@@ -167,7 +167,7 @@ input[type="submit"]:hover {
 
 }
 
-button > a {
+button>a {
   text-decoration: none;
 }
 
@@ -401,33 +401,48 @@ h3 {
 .line-info {
   background-color: #d5ebf1;
   border: 1px solid white;
-
+  min-height: 33px;
   font-size: 16px;
   display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
 }
 
 
 
-.line-info > label {
+.line-info>label {
   display: inline-block;
   height: 100%;
-  border-right: 2px solid white;
-  padding-top: 6px;
-  padding-bottom: 6px;
+
+
+  margin-top: auto;
+  margin-bottom: auto;
   padding-left: 2px;
 }
 
-.line-info>span,.line-info>input{
-  display: inline-block;
-  height: 100%;
-  width: 300px;
+.line-info>span,
+.line-info>input {
   padding-left: 2px;
+  border: none;
+  margin: 2px;
+  font-size: 16px;
+  display: inline-block;
+  width: 440px;
+
 }
 
 .fix-errors {
   width: 500px;
 
 }
+.line-info>span>a {
+  font-size: 16px;
+  display: inline-block;
+}
+
+.line-info>span {
+  overflow-y: scroll;
+}
+
