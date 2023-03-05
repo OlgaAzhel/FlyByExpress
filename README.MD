@@ -1,5 +1,5 @@
 ## FlyByExpress 
-FlyByExpress is an application for vewing and posting advertisements for shipping packages by individuals. The app is created to help members of Belarussian immigrants community in the US to connect with people who are flying to their home country and are willing to deliver packages and gifts to Belarus. The application provides a space, where a user can publish an offer for package delivery and other users can choose from the list of current offers and connect with the the courier.
+FlyByExpress is an application for viewing and posting advertisements for shipping packages by individuals. The app is created to help members of Belarusian immigrants community in the US to connect with people who are flying to their home country and are willing to deliver packages and gifts to Belarus. The application provides a space, where a user can publish an offer for package delivery and other users can choose from the list of current offers and connect with the the courier.
 
 ### Screenshots
 ![alt text](./public/images/1.jpg)
