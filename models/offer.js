@@ -93,7 +93,7 @@ const offerSchema = new Schema({
             validator: function (input) {
                 return input.length <= 200
             },
-            message: "Additional info must be not longer than 50 characters"
+            message: "Additional info must be not longer than 200 characters"
         }
 },
     creator: {

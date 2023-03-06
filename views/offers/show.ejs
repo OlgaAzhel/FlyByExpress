@@ -48,16 +48,17 @@
                     <%= offer.destinationCity%>
                 </td>
             </tr>
-            <tr class="single-offer">
-                <td class="header-col">DEPARTURE DATE:</td>
-                <td><%=offer.departureDate.toLocaleDateString('en-us', { timeZone: 'GMT' , year:"numeric",
-                        month:"short", day:"numeric"})%></td>
-            </tr>
+
             <tr class="single-offer">
                 <td class="header-col">LAST DAY ACCEPTING PACKAGES:</td>
                 <td><%=offer.cutoffDate.toLocaleDateString('en-us', { timeZone: 'GMT' ,year:"numeric", month:"short",
                         day:"numeric"})%>
                 </td>
+            </tr>
+            <tr class="single-offer">
+                <td class="header-col">DEPARTURE DATE:</td>
+                <td><%=offer.departureDate.toLocaleDateString('en-us', { timeZone: 'GMT' , year:"numeric",
+                        month:"short", day:"numeric"})%></td>
             </tr>
             <tr class="single-offer">
                 <td class="header-col">PACKAGE AVAILABLE AT THE DESTINATION:</td>
@@ -84,137 +85,134 @@
                 </td>
             </tr>
             <% let d=new Date() %>
-            <% let time=d.getTime() %>
-            <% let offerTime=offer.availDate.getTime() %>
-            <% if (user.googleId===offerCreator.googleId && offerTime> time ) { %>
-                <tr>
-                    <td></td>
-                    <td class="buttons">
-                    <button ><a href="/offers/<%=offer.id%>/edit">EDIT OFFER</a></button>
-    
-                    <form action="/offers/<%= offer._id %>?_method=DELETE" method="POST" ">
+                <% let time=d.getTime() %>
+                    <% let offerTime=offer.availDate.getTime() %>
+                        <% if (user.googleId===offerCreator.googleId && offerTime> time ) { %>
+                            <tr>
+                                <td></td>
+                                <td class="buttons">
+                                    <button><a href="/offers/<%=offer.id%>/edit">EDIT OFFER</a></button>
+
+                                    <form action="/offers/<%= offer._id %>?_method=DELETE" method="POST" ">
                 
                 <button class=" delete" type="submit">❌DELETE OFFER</button>
-                    </form>
-                    </td>
-                </tr>
-                    <% } %>
+                                    </form>
+                                </td>
+                            </tr>
+                            <% } %>
         <tbody>
     </table>
 
 
 
-                        <% let reviewOnTime=offer.departureDate.getTime() %>
-                            <% if (reviewOnTime < time) {%>
-                                <% if (user.googleId!==offerCreator.googleId) { %>
-                                    <form id="add-review-form" method="POST" action="/offers/<%= offer._id%>/reviews">
-                                        <label>
-                                            <h2>CREATE A REVIEW:</h2>
-                                        </label><br>
-                                        <textarea class="review-body" name="content"></textarea><br>
-                                        <label>Rate communication:
-                                            <select class="rating" name="communication">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5" selected>5</option>
-                                            </select></label><br>
-                                        <label>Rate cost:
-                                            <select class="rating" name="cost">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5" selected>5</option>
-                                            </select></label><br>
-                                        <label>Rate overall satisfaction:
-                                            <select class="rating" name="overall">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5" selected>5</option>
-                                            </select></label><br>
-                                        <input type="submit" value="ADD REVIEW">
-                                    </form>
-                                    <% } %>
-                                        </section>
-                                        <% } %>
+    <% let reviewOnTime=offer.departureDate.getTime() %>
+        <% if (reviewOnTime < time) {%>
+            <% if (user.googleId!==offerCreator.googleId) { %>
+                <form id="add-review-form" method="POST" action="/offers/<%= offer._id%>/reviews">
+                    <label>
+                        <h2>CREATE A REVIEW:</h2>
+                    </label><br>
+                    <textarea class="review-body" name="content"></textarea><br>
+                    <label>Rate communication:
+                        <select class="rating" name="communication">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5" selected>5</option>
+                        </select></label><br>
+                    <label>Rate cost:
+                        <select class="rating" name="cost">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5" selected>5</option>
+                        </select></label><br>
+                    <label>Rate overall satisfaction:
+                        <select class="rating" name="overall">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5" selected>5</option>
+                        </select></label><br>
+                    <input type="submit" value="ADD REVIEW">
+                </form>
+                <% } %>
+                    </section>
+                    <% } %>
 
 
-                                            <section class="reviews-list">
-                                                <% if (reviews.length>= 1) { %>
-                                                    <h2>REVIEWS:</h2>
-                                                    <% reviews.forEach(function(r) { %>
-                                                        <section class="review">
-                                                            <span class="delete-btn">
-                                                                <% if (user.name===r.userName) {%>
-                                                                    <form action="/reviews/<%= r._id%>?_method=DELETE"
-                                                                        method="POST">
-                                                                        <input type="text" name="offer"
-                                                                            value="<%= offer._id%>" class="hidden">
-                                                                        <button id="delete-review"
-                                                                            type="submit">❌</button>
-                                                                        <span class="hide">DELETE REVIEW</span>
-                                                                    </form>
-                                                                    <% } %>
-                                                            </span>
-                                                            <span class="picture">
-                                                                <img alt="avatar" src="<%= r.userAvatar %>"
-                                                                    referrerpolicy="no-referrer">
-                                                                <a href="/users/<%= r.user._id%>">
-                                                                    <%= r.userName %>
-                                                                </a>
-                                                                <%= r.createdAt.toLocaleDateString('en-us', { timeZone: 'GMT' ,year:"numeric", month:"short",
-                        day:"numeric"}) %>
-                                                            </span>
-                                                            <span class="delivery-review">
+                        <section class="reviews-list">
+                            <% if (reviews.length>= 1) { %>
+                                <h2>REVIEWS:</h2>
+                                <% reviews.forEach(function(r) { %>
+                                    <section class="review">
+                                        <span class="delete-btn">
+                                            <% if (user.name===r.userName) {%>
+                                                <form action="/reviews/<%= r._id%>?_method=DELETE" method="POST">
+                                                    <input type="text" name="offer" value="<%= offer._id%>"
+                                                        class="hidden">
+                                                    <button id="delete-review" type="submit">❌</button>
+                                                    <span class="hide">DELETE REVIEW</span>
+                                                </form>
+                                                <% } %>
+                                        </span>
+                                        <span class="picture">
+                                            <img alt="avatar" src="<%= r.userAvatar %>" referrerpolicy="no-referrer">
+                                            <a href="/users/<%= r.user._id%>">
+                                                <%= r.userName %>
+                                            </a>
+                                            <%= r.createdAt.toLocaleDateString('en-us', { timeZone: 'GMT'
+                                                ,year:"numeric", month:"short", day:"numeric"}) %>
+                                        </span>
+                                        <span class="delivery-review">
 
-                                                                <table>
-                                                                    <tr>
-                                                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <td>
 
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <%= r.content %>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </span>
-                                                            <span class="rate">
-                                                                <table>
-                                                                    <tr>
-                                                                        <td>Communication rate:</td>
-                                                                        <td class="grade">
-                                                                            <%= r.communication %>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Cost rate:</td>
-                                                                        <td class="grade">
-                                                                            <%= r.cost %>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Overall satisfaction rate:&nbsp&nbsp</td>
-                                                                        <td class="grade">
-                                                                            <%= r.overall %>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <%= r.content %>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </span>
+                                        <span class="rate">
+                                            <table>
+                                                <tr>
+                                                    <td>Communication rate:</td>
+                                                    <td class="grade">
+                                                        <%= r.communication %>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cost rate:</td>
+                                                    <td class="grade">
+                                                        <%= r.cost %>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Overall satisfaction rate:&nbsp&nbsp</td>
+                                                    <td class="grade">
+                                                        <%= r.overall %>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </span>
 
-                                                        </section>
-                                                        <% }); %>
-                                                            <% } else {%>
-                                                                <h4>NO REVIEWS YET</h4>
-                                                                <% } %>
+                                    </section>
+                                    <% }); %>
+                                        <% } else {%>
+                                            <h4>NO REVIEWS YET</h4>
+                                            <% } %>
 
-                                                                    </tbody>
-                                                                    </table>
-                                            </section>
+                                                </tbody>
+                                                </table>
+                        </section>
 
-                                            <%- include('../partials/footer') %>
+                        <%- include('../partials/footer') %>

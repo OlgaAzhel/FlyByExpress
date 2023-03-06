@@ -23,9 +23,9 @@ function create(req, res) {
 
     const offer = new Offer(req.body)
 
-    offer.save(function (err) {
+    offer.save(function(err) {
         // https://stackoverflow.com/questions/61056021/improve-mongoose-validation-error-handling
-        if (err.name === "ValidationError") {
+        if (err && err.name === "ValidationError") {
             console.log("THIS IS ERROR OBJECT:", err, err.name)
             
             let listOfErrors = []
@@ -54,13 +54,10 @@ function create(req, res) {
 }
 
 function show(req, res) {
-    console.log("Show offer controller run...")
     Offer.findById(req.params.id, function (err, offer) {
         Review.find({ offer: offer }, function (err, reviews) {
             User.findById(offer.creator._id, function (err, offerCreator) {
-                // let creatorName = offerCreator.name
                 Review.find({ offerCreator: offerCreator }, function (err, couriersReviews) {
-                    console.log("REVIEWS FOR THIS COURIER:", offerCreator.name, couriersReviews)
                     let totalScore = 0
                     let couriersRating
                     if (couriersReviews) {
@@ -72,8 +69,6 @@ function show(req, res) {
                         couriersRating = totalScore / 3 / couriersReviews.length
 
                     }
-
-
                     res.render('offers/show', { title: 'Offer Details', offer, offerCreator, reviews, couriersRating })
 
                 })
@@ -143,6 +138,8 @@ function intoDateString(string) {
     return arr.join("-")
 
 }
+
+
 function update(req, res) {
 
     console.log(req.body)
@@ -161,21 +158,6 @@ function update(req, res) {
 
 function deleteOffer(req, res) {
     console.log("DElete offer controller run", req.params.id)
-    // Offer.find({ _id: req.params.id }, function (err, offer) {
-    //     console.log("OFFER:", offer)
-    //     User.find({ creator: offer.creator }, function (err, offerCreator) {
-    //         console.log("OFFER CREATOR:", offerCreator)
-    //         let offersArray = offerCreator.offers
-    //         console.log("OFFER CREATOR's OFFERS:", offerCreator.offers)
-    //         let index = offersArray.findIndex(offer)
-    //         console.log("INDEX of THE OFFER TO DELETE:", index)
-    //         offersArray.splice(index, 1)
-    //         offerCreator.offers = offersArray
-    //         offerCreator.save(function (err) {
-    //             console.log("Offers inside offerCreator updated")
-    //         })
-    //     })
-    // })
 
     Offer.deleteOne({ _id: req.params.id }, function (err, offer) {
 
