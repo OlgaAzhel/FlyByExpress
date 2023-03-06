@@ -25,4 +25,4 @@ FlyByExpress is an application for viewing and posting advertisements for shippi
 ![Trello](https://img.shields.io/badge/Trello-%23026AA7.svg?style=for-the-badge&logo=Trello&logoColor=white)
 
 ## Next spets:
-implement possibility to save offers in user's collection for easier future reference, implement review validation,so only users who actually used services could leave reviews.
+Implement admin user functionality, implement possibility to save offers in user's collection for easier future reference, implement review validation,so only users who actually ordered delivery could leave reviews.
